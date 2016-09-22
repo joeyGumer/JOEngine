@@ -4,6 +4,12 @@
 #include "Primitive.h"
 #include "PhysBody3D.h"
 
+
+//IMGUI test
+#include "Imgui\imgui.h"
+#include "Imgui\imgui_impl_sdl_gl3.h"
+#include "Imgui\GL/gl3w.h"
+
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	
