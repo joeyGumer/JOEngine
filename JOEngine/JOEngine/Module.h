@@ -1,5 +1,6 @@
 #pragma once
 
+#include "globals.h"
 class Application;
 struct PhysBody3D;
 
