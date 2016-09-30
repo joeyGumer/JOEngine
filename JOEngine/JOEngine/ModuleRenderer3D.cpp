@@ -99,7 +99,7 @@ bool ModuleRenderer3D::Init()
 	// Projection matrix for
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	
-	App->camera->Look(vec3(1.75f, 1.75f, 5.0f), vec3(0.0f, 0.0f, 0.0f));
+	App->camera->Look(float3(1.75f, 1.75f, 5.0f), float3(0.0f, 0.0f, 0.0f));
 
 	return ret;
 }
@@ -152,8 +152,8 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	ProjectionMatrix = perspective(60.0f, (float)width / (float)height, 0.125f, 512.0f);
-	glLoadMatrixf(&ProjectionMatrix);
+	//ProjectionMatrix = perspective(60.0f, (float)width / (float)height, 0.125f, 512.0f);
+	glLoadMatrixf(ProjectionMatrix.ptr());
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();

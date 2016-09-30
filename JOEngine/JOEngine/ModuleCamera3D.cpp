@@ -7,12 +7,12 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 {
 	CalculateViewMatrix();
 
-	X = vec3(1.0f, 0.0f, 0.0f);
-	Y = vec3(0.0f, 1.0f, 0.0f);
-	Z = vec3(0.0f, 0.0f, 1.0f);
+	X = float3(1.0f, 0.0f, 0.0f);
+	Y = float3(0.0f, 1.0f, 0.0f);
+	Z = float3(0.0f, 0.0f, 1.0f);
 
-	Position = vec3(0.0f, 0.0f, 5.0f);
-	Reference = vec3(0.0f, 0.0f, 0.0f);
+	Position = float3(0.0f, 0.0f, 5.0f);
+	Reference = float3(0.0f, 0.0f, 0.0f);
 
 	following = NULL;
 }
@@ -43,17 +43,17 @@ update_status ModuleCamera3D::Update(float dt)
 	// Follow code
 	if(following != NULL)
 	{
-		mat4x4 m;
-		following->GetTransform(&m);
+		float4x4 m;
+		following->GetTransform(m.ptr());
 
-		Look(Position, m.translation(), true);
+		Look(Position, m.TranslatePart(), true);
 
 		// Correct height
 		Position.y = (15.0*Position.y + Position.y + following_height) / 16.0;
 
 		// Correct distance
-		vec3 cam_to_target = m.translation() - Position;
-		float dist = length(cam_to_target);
+		float3 cam_to_target = m.TranslatePart() - Position;
+		float dist = cam_to_target.Length();
 		float correctionFactor = 0.f;
 		if(dist < min_following_dist)
 		{
@@ -76,15 +76,15 @@ update_status ModuleCamera3D::Update(float dt)
 
 	float Distance = Speed * dt;
 
-	vec3 Up(0.0f, 1.0f, 0.0f);
-	vec3 Right = X;
-	vec3 Forward = cross(Up, Right);
+	float3 Up(0.0f, 1.0f, 0.0f);
+	float3 Right = X;
+	float3 Forward = Cross(Up, Right);
 
 	Up *= Distance;
 	Right *= Distance;
 	Forward *= Distance;
 
-	vec3 Movement;
+	float3 Movement;
 
 	if(App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) Movement += Forward;
 	if(App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) Movement -= Forward;
@@ -111,27 +111,35 @@ update_status ModuleCamera3D::Update(float dt)
 		if(dx != 0)
 		{
 			float DeltaX = (float)dx * Sensitivity;
+			
+			Quat q = { float3(0.0f, 1.0f, 0.0f), DeltaX };
 
-			X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+			q.Transform(X);
+			q.Transform(Y);
+			q.Transform(Z);
+	
+			/*X = rotate(X, DeltaX, float3(0.0f, 1.0f, 0.0f));
+			Y = rotate(Y, DeltaX, float3(0.0f, 1.0f, 0.0f));
+			Z = rotate(Z, DeltaX, float3(0.0f, 1.0f, 0.0f));*/
 		}
 
 		if(dy != 0)
 		{
 			float DeltaY = (float)dy * Sensitivity;
 
-			Y = rotate(Y, DeltaY, X);
-			Z = rotate(Z, DeltaY, X);
+			Quat q = { X, DeltaY };
+
+			q.Transform(Y);
+			q.Transform(Z);
 
 			if(Y.y < 0.0f)
 			{
-				Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
-				Y = cross(Z, X);
+				Z = float3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
+				Y = Cross(Z, X);
 			}
 		}
 
-		Position = Reference + Z * length(Position);
+		Position = Reference + Z * Position.Length();
 	}
 
 	// Mouse wheel -----------------------
@@ -140,12 +148,12 @@ update_status ModuleCamera3D::Update(float dt)
 
 	Position -= Reference;
 
-	if(zDelta < 0 && length(Position) < 500.0f)
+	if(zDelta < 0 && Position.Length() < 500.0f)
 	{
 		Position += Position * 0.1f;
 	}
 
-	if(zDelta > 0 && length(Position) > 0.05f)
+	if(zDelta > 0 && Position.Length() > 0.05f)
 	{
 		Position -= Position * 0.1f;
 	}
@@ -159,14 +167,14 @@ update_status ModuleCamera3D::Update(float dt)
 }
 
 // -----------------------------------------------------------------
-void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference)
+void ModuleCamera3D::Look(const float3 &Position, const float3 &Reference, bool RotateAroundReference)
 {
 	this->Position = Position;
 	this->Reference = Reference;
 
-	Z = normalize(Position - Reference);
-	X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
-	Y = cross(Z, X);
+	Z = (Position-Reference).Normalized();
+	X = (Cross(float3(0.0f, 1.0f, 0.0f), Z)).Normalized();
+	Y = Cross(Z, X);
 
 	if(!RotateAroundReference)
 	{
@@ -178,7 +186,7 @@ void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool Rota
 }
 
 // -----------------------------------------------------------------
-void ModuleCamera3D::Move(const vec3 &Movement)
+void ModuleCamera3D::Move(const float3 &Movement)
 {
 	Position += Movement;
 	Reference += Movement;
@@ -189,14 +197,14 @@ void ModuleCamera3D::Move(const vec3 &Movement)
 // -----------------------------------------------------------------
 float* ModuleCamera3D::GetViewMatrix()
 {
-	return &ViewMatrix;
+	return ViewMatrix.ptr();
 }
 
 // -----------------------------------------------------------------
 void ModuleCamera3D::CalculateViewMatrix()
 {
-	ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);
-	ViewMatrixInverse = inverse(ViewMatrix);
+	ViewMatrix = float4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -Dot(X, Position), -Dot(Y, Position), -Dot(Z, Position), 1.0f);
+	ViewMatrixInverse = ViewMatrix.Inverted();
 }
 
 // -----------------------------------------------------------------

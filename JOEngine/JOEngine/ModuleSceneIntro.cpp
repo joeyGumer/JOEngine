@@ -20,7 +20,7 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
-	App->camera->Move(vec3(0, 10, -10));
+	App->camera->Move(float3(0, 10, -10));
 
 	return ret;
 }
@@ -46,7 +46,7 @@ update_status ModuleSceneIntro::Update(float dt)
 {
 	update_status ret = UPDATE_CONTINUE;
 
-	Plane(0, 1, 0, 0).Render();
+	pPlane(0, 1, 0, 0).Render();
 
 	
 

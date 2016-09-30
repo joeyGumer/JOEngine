@@ -26,10 +26,10 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-	PhysBody3D*		AddBody(const Cube& cube, float mass = 1.0f);
-	PhysBody3D*		AddBody(const Sphere& sphere, float mass = 1.0f);
-	PhysBody3D*		AddBody(const Cylinder& cylinder, float mass = 1.0f);
-	PhysBody3D*		AddBody(const Plane& plane);
+	PhysBody3D*		AddBody(const pCube& cube, float mass = 1.0f);
+	PhysBody3D*		AddBody(const pSphere& sphere, float mass = 1.0f);
+	PhysBody3D*		AddBody(const pCylinder& cylinder, float mass = 1.0f);
+	PhysBody3D*		AddBody(const pPlane& plane);
 	PhysBody3D*		AddHeighField(const char* filename, int width, int height);
 	PhysVehicle3D*	AddVehicle(const VehicleInfo& info);
 
@@ -66,6 +66,6 @@ public:
 	int	 getDebugMode() const;
 
 	DebugDrawModes mode;
-	Line line;
+	pLine line;
 	Primitive point;
 };

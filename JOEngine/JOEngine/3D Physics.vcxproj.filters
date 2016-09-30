@@ -10,17 +10,20 @@
     <Filter Include="Sources\Containers">
       <UniqueIdentifier>{afc36133-f401-499a-aa33-0da1e500fb52}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Tools">
-      <UniqueIdentifier>{7e4dfaf7-022c-4f7d-92aa-f3b3fa9d6248}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Helpers">
       <UniqueIdentifier>{121f8e6b-df36-4ab0-be0d-601ddfc9e503}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Modules\Game">
       <UniqueIdentifier>{83f46af7-e02f-40c0-9e56-41d76082527b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Tools\Imgui">
+    <Filter Include="Sources\Extern Tools/Libs">
+      <UniqueIdentifier>{7e4dfaf7-022c-4f7d-92aa-f3b3fa9d6248}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Extern Tools/Libs\Imgui">
       <UniqueIdentifier>{2882b06c-ec34-45f2-b254-42c113daa944}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Extern Tools/Libs\MathGeoLib">
+      <UniqueIdentifier>{50f9b47f-7b15-4b62-bd37-962eb1f841e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,12 +54,6 @@
     <ClInclude Include="p2Point.h">
       <Filter>Sources\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="glmath.h">
-      <Filter>Sources\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Sources\Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Sources</Filter>
     </ClInclude>
@@ -84,35 +81,47 @@
     <ClInclude Include="PhysBody3D.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="PhysVehicle3D.h">
-      <Filter>Sources\Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleEditor.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imgui.h">
-      <Filter>Sources\Tools\Imgui</Filter>
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imgui_impl_sdl_gl3.h">
-      <Filter>Sources\Tools\Imgui</Filter>
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\GL\gl3w.h">
-      <Filter>Sources\Tools\Imgui</Filter>
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imconfig.h">
-      <Filter>Sources\Tools\Imgui</Filter>
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imgui_internal.h">
-      <Filter>Sources\Tools\Imgui</Filter>
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\stb_rect_pack.h">
-      <Filter>Sources\Tools\Imgui</Filter>
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\stb_textedit.h">
-      <Filter>Sources\Tools\Imgui</Filter>
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\stb_truetype.h">
-      <Filter>Sources\Tools\Imgui</Filter>
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Sources\Extern Tools/Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="MathGeoLib\Include\MathBuildConfig.h">
+      <Filter>Sources\Extern Tools/Libs\MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MathGeoLib\Include\MathGeoLib.h">
+      <Filter>Sources\Extern Tools/Libs\MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Sources\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="MathGeoLib\Include\MathGeoLibFwd.h">
+      <Filter>Sources\Extern Tools/Libs\MathGeoLib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -132,19 +141,16 @@
       <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="log.cpp">
-      <Filter>Sources\Tools</Filter>
+      <Filter>Sources\Extern Tools/Libs</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
-      <Filter>Sources\Tools</Filter>
+      <Filter>Sources\Extern Tools/Libs</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="glmath.cpp">
-      <Filter>Sources\Containers</Filter>
     </ClCompile>
     <ClCompile Include="Primitive.cpp">
       <Filter>Sources\Helpers</Filter>
@@ -167,26 +173,23 @@
     <ClCompile Include="PhysBody3D.cpp">
       <Filter>Sources\Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="PhysVehicle3D.cpp">
-      <Filter>Sources\Helpers</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleEditor.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui.cpp">
-      <Filter>Sources\Tools\Imgui</Filter>
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_impl_sdl_gl3.cpp">
-      <Filter>Sources\Tools\Imgui</Filter>
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\GL\gl3w.c">
-      <Filter>Sources\Tools\Imgui</Filter>
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_demo.cpp">
-      <Filter>Sources\Tools\Imgui</Filter>
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_draw.cpp">
-      <Filter>Sources\Tools\Imgui</Filter>
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

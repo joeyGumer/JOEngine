@@ -1,5 +1,5 @@
 #include "PhysBody3D.h"
-#include "glmath.h"
+#include "Math.h"
 #include "Bullet\src\btBulletDynamicsCommon.h"
 
 // ---------------------------------------------------------
