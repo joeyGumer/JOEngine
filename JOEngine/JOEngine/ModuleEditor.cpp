@@ -3,7 +3,7 @@
 
 
 //IMGUI 
-#include "Imgui\imgui.h"
+/*#include "Imgui\imgui.h"
 #include "Imgui\imgui_impl_sdl_gl3.h"
 #include "Imgui\GL\gl3w.h"
 
@@ -80,6 +80,6 @@ update_status ModuleEditor::PostUpdate(float dt)
 
 	return UPDATE_CONTINUE;
 }
-
+*/
 
 

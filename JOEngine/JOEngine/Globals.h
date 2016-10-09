@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _GLOBALS_H_
+#define _GLOBALS_H_
+
 #include <windows.h>
 #include <stdio.h>
 
@@ -23,12 +25,14 @@ enum update_status
 };
 
 // Configuration -----------
-#define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 1024
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 780
 #define SCREEN_SIZE 1
 #define WIN_FULLSCREEN false
 #define WIN_RESIZABLE true
 #define WIN_BORDERLESS false
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
-#define TITLE "3D Physics Playground"
+#define TITLE "JOEngine"
+
+#endif _GLOBALS_H_

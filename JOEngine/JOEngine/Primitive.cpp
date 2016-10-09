@@ -1,5 +1,5 @@
 
-#include "Globals.h"
+/*#include "Globals.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include "Primitive.h"
@@ -274,4 +274,4 @@ void pPlane::InnerRender() const
 	}
 
 	glEnd();
-}
+}*/

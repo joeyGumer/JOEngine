@@ -1,4 +1,3 @@
-#pragma once
 
 #ifndef _MODULEEDITOR_H_
 #define _MODULEEDITOR_H_
@@ -10,7 +9,7 @@ class Application;
 
 class ModuleEditor : public Module
 {
-public:
+/*public:
 
 	ModuleEditor(Application* parent, bool start_enabled = true);
 	~ModuleEditor();
@@ -22,7 +21,7 @@ public:
 	bool CleanUp();
 
 private:
-
+*/
 };
 
 

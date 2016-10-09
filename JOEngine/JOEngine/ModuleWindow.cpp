@@ -4,8 +4,7 @@
 
 ModuleWindow::ModuleWindow(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	window = NULL;
-	screen_surface = NULL;
+	
 }
 
 // Destructor
@@ -13,29 +12,74 @@ ModuleWindow::~ModuleWindow()
 {
 }
 
+// NOTE: declaring WindowProc here due to some errors in previous initialization
+LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_DESTROY:
+	{
+		PostQuitMessage(0);
+		return 0;
+	} break;
+	}
+
+	return DefWindowProc(hWnd, message, wParam, lParam);
+}
+
 // Called before render is available
 bool ModuleWindow::Init()
 {
-	LOG("Init SDL window & surface");
+	LOG("Init DirectX9 Window");
 	bool ret = true;
 
-	if(SDL_Init(SDL_INIT_VIDEO) < 0)
+	/*if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		LOG("SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
-	}
-	else
-	{
+	}*/
+	
 		//Create window
 		int width = SCREEN_WIDTH * SCREEN_SIZE;
 		int height = SCREEN_HEIGHT * SCREEN_SIZE;
-		Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
+		
+		// clear out the window class for use
+		ZeroMemory(&wc, sizeof(WNDCLASSEX));
 
-		//Use OpenGL 2.1
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+		// fill in the struct with the needed information
+		wc.cbSize = sizeof(WNDCLASSEX);
+		wc.style = CS_HREDRAW | CS_VREDRAW;
+		wc.lpfnWndProc = WindowProc;
+		wc.hInstance = GetModuleHandle(0);
+		wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+		wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
+		wc.lpszClassName = "WindowClass1";
 
-		if(WIN_FULLSCREEN == true)
+		// register the window class
+		RegisterClassEx(&wc);
+
+		HINSTANCE hInstatnce = GetModuleHandle(0);
+		// create the window and use the result as the handle
+		int i = 0;
+		hWnd = CreateWindowEx(NULL,
+			"WindowClass1",    // name of the window class
+			TITLE,   // title of the window
+			WS_OVERLAPPEDWINDOW,    // window style
+			100,    // x-position of the window
+			100,    // y-position of the window
+			width,    // width of the window
+			height,    // height of the window
+			NULL,    // we have no parent window, NULL
+			NULL,    // we aren't using menus, NULL
+			hInstatnce,    // application handle
+			NULL);    // used with multiple windows, NULL
+			
+
+		// display the window on the screen
+		ShowWindow(hWnd, 1);
+
+		//PRE-DIRECTX CODE
+		/*if(WIN_FULLSCREEN == true)
 		{
 			flags |= SDL_WINDOW_FULLSCREEN;
 		}
@@ -67,7 +111,7 @@ bool ModuleWindow::Init()
 			//Get window surface
 			screen_surface = SDL_GetWindowSurface(window);
 		}
-	}
+	}*/
 
 	return ret;
 }
@@ -75,13 +119,13 @@ bool ModuleWindow::Init()
 // Called before quitting
 bool ModuleWindow::CleanUp()
 {
-	LOG("Destroying SDL window and quitting all SDL systems");
+	/*LOG("Destroying SDL window and quitting all SDL systems");
 
 	//Destroy window
 	if(window != NULL)
 	{
 		SDL_DestroyWindow(window);
-	}
+	}*/
 
 	//Quit SDL subsystems
 	SDL_Quit();
@@ -90,5 +134,7 @@ bool ModuleWindow::CleanUp()
 
 void ModuleWindow::SetTitle(const char* title)
 {
-	SDL_SetWindowTitle(window, title);
+	//SDL_SetWindowTitle(window, title);
+	
 }
+

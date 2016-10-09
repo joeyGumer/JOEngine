@@ -18,7 +18,7 @@
 
 //WARNING: LOG namespace errors, have to change
 
-ModulePhysics3D::ModulePhysics3D(Application* app, bool start_enabled) : Module(app, start_enabled)
+/*ModulePhysics3D::ModulePhysics3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	debug = false;
 }
@@ -247,6 +247,7 @@ void ModulePhysics3D::DeleteBody(PhysBody3D* pbody)
 	pbody->collision_shape = NULL;
 	*/
 	// TODO: remove from the array "bodies"
+/*
 }
 
 // ---------------------------------------------------------
@@ -417,4 +418,4 @@ void DebugDrawer::setDebugMode(int debugMode)
 int	 DebugDrawer::getDebugMode() const
 {
 	return mode;
-}
+}*/

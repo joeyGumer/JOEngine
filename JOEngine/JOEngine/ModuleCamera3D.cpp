@@ -3,7 +3,7 @@
 #include "PhysBody3D.h"
 #include "ModuleCamera3D.h"
 
-ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
+/*ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	CalculateViewMatrix();
 
@@ -120,7 +120,7 @@ update_status ModuleCamera3D::Update(float dt)
 	
 			/*X = rotate(X, DeltaX, float3(0.0f, 1.0f, 0.0f));
 			Y = rotate(Y, DeltaX, float3(0.0f, 1.0f, 0.0f));
-			Z = rotate(Z, DeltaX, float3(0.0f, 1.0f, 0.0f));*/
+			Z = rotate(Z, DeltaX, float3(0.0f, 1.0f, 0.0f));
 		}
 
 		if(dy != 0)
@@ -221,3 +221,4 @@ void ModuleCamera3D::UnFollow()
 {
 	following = NULL;
 }
+*/

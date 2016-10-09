@@ -132,7 +132,7 @@ public:
 	static float3x3 RotateY(float angleRadians);
 	/** [similarOverload: RotateX] [hideIndex] */
 	static float3x3 RotateZ(float angleRadians);
-
+	
 	/// Creates a new float3x3 that rotates about the given axis by the given angle.
 	static float3x3 RotateAxisAngle(const float3 &axisDirection, float angleRadians);
 

@@ -25,24 +25,39 @@
     <Filter Include="Sources\Extern Tools/Libs\MathGeoLib">
       <UniqueIdentifier>{50f9b47f-7b15-4b62-bd37-962eb1f841e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Modules\Audio">
+      <UniqueIdentifier>{53c9e75a-197f-4aa7-a42f-d6265e7a676b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Modules\Camera3D">
+      <UniqueIdentifier>{f6e43d92-a697-4969-a62e-71accc36acbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Modules\Editor">
+      <UniqueIdentifier>{5cc85510-5bd4-4c23-8369-c20e3e127d54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Modules\Input">
+      <UniqueIdentifier>{98f68b6b-538a-4fb0-8c1b-002bd99d4c01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Modules\Physics3D">
+      <UniqueIdentifier>{0b4cfd59-d256-40e3-b10e-17ff0db97cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Modules\Render3D">
+      <UniqueIdentifier>{4d581bca-8e8d-44bf-81b8-dd85083fea57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Modules\Window">
+      <UniqueIdentifier>{3e5373f7-7c1d-486c-9b13-f6164033b6a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Helpers\Light">
+      <UniqueIdentifier>{3f106d0f-ffc8-4e7b-8be2-90f076081d09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Helpers\PhysBody3D">
+      <UniqueIdentifier>{a66df7ee-0355-4df6-bee2-2f3e982080a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Helpers\Primitive">
+      <UniqueIdentifier>{640c7f4b-b899-4382-a217-34bee94e8ff2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleAudio.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleCamera3D.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleInput.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleRenderer3D.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleWindow.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
     <ClInclude Include="p2DynArray.h">
@@ -60,29 +75,14 @@
     <ClInclude Include="Globals.h">
       <Filter>Sources</Filter>
     </ClInclude>
-    <ClInclude Include="Primitive.h">
-      <Filter>Sources\Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="Color.h">
       <Filter>Sources\Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>Sources\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="ModuleSceneIntro.h">
       <Filter>Sources\Modules\Game</Filter>
     </ClInclude>
     <ClInclude Include="ModulePlayer.h">
       <Filter>Sources\Modules\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="ModulePhysics3D.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysBody3D.h">
-      <Filter>Sources\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleEditor.h">
-      <Filter>Sources\Modules</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imgui.h">
       <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
@@ -120,26 +120,38 @@
     <ClInclude Include="Math.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="MathGeoLib\Include\MathGeoLibFwd.h">
-      <Filter>Sources\Extern Tools/Libs\MathGeoLib</Filter>
+    <ClInclude Include="ModuleAudio.h">
+      <Filter>Sources\Modules\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCamera3D.h">
+      <Filter>Sources\Modules\Camera3D</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEditor.h">
+      <Filter>Sources\Modules\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleInput.h">
+      <Filter>Sources\Modules\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePhysics3D.h">
+      <Filter>Sources\Modules\Physics3D</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleRenderer3D.h">
+      <Filter>Sources\Modules\Render3D</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWindow.h">
+      <Filter>Sources\Modules\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysBody3D.h">
+      <Filter>Sources\Helpers\PhysBody3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Sources\Helpers\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitive.h">
+      <Filter>Sources\Helpers\Primitive</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ModuleAudio.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleCamera3D.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleInput.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleRenderer3D.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleWindow.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="log.cpp">
       <Filter>Sources\Extern Tools/Libs</Filter>
     </ClCompile>
@@ -152,29 +164,14 @@
     <ClCompile Include="Main.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Primitive.cpp">
-      <Filter>Sources\Helpers</Filter>
-    </ClCompile>
     <ClCompile Include="Color.cpp">
       <Filter>Sources\Containers</Filter>
-    </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>Sources\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="ModulePhysics3D.cpp">
-      <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneIntro.cpp">
       <Filter>Sources\Modules\Game</Filter>
     </ClCompile>
     <ClCompile Include="ModulePlayer.cpp">
       <Filter>Sources\Modules\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysBody3D.cpp">
-      <Filter>Sources\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleEditor.cpp">
-      <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui.cpp">
       <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
@@ -190,6 +187,36 @@
     </ClCompile>
     <ClCompile Include="Imgui\imgui_draw.cpp">
       <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleAudio.cpp">
+      <Filter>Sources\Modules\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCamera3D.cpp">
+      <Filter>Sources\Modules\Camera3D</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleEditor.cpp">
+      <Filter>Sources\Modules\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleInput.cpp">
+      <Filter>Sources\Modules\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePhysics3D.cpp">
+      <Filter>Sources\Modules\Physics3D</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleRenderer3D.cpp">
+      <Filter>Sources\Modules\Render3D</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWindow.cpp">
+      <Filter>Sources\Modules\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysBody3D.cpp">
+      <Filter>Sources\Helpers\PhysBody3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Sources\Helpers\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Primitive.cpp">
+      <Filter>Sources\Helpers\Primitive</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -20,12 +20,18 @@ public:
 
 	void SetTitle(const char* title);
 
-public:
-	//The window we'll be rendering to
-	SDL_Window* window;
+private:
 
-	//The surface contained by the window
-	SDL_Surface* screen_surface;
+	//NOTE: Ask ric how to handle this
+	//LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+	
+
+public:
+
+	// the window handler
+	HWND hWnd;
+	// this struct holds information for the window class
+	WNDCLASSEX wc;
 };
 
 #endif // __ModuleWindow_H__
