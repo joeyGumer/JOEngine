@@ -41,7 +41,7 @@ bool ModuleRenderer3D::Init()
 	d3dpp.Windowed = TRUE;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	d3dpp.hDeviceWindow = App->window->hWnd;
-	d3dpp.BackBufferFormat = D3DFMT_X8R8G8B8;
+	d3dpp.BackBufferFormat = D3DFMT_X8R8G8B8;	//Has no alpha
 	d3dpp.BackBufferWidth = SCREEN_WIDTH;
 	d3dpp.BackBufferHeight = SCREEN_HEIGHT;
 	d3dpp.EnableAutoDepthStencil = TRUE;
@@ -55,13 +55,13 @@ bool ModuleRenderer3D::Init()
 		&d3dpp,
 		&d3ddev);
 
-	init_graphics();    // call the function to initialize the triangle
-	init_light();
+	init_graphics();    // call the function to initialize the geometry
+	init_light();		// call the function to initialize the lights and materials
 
-	d3ddev->SetRenderState(D3DRS_LIGHTING, TRUE);    // turn off the 3D lighting
-	d3ddev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);    // both sides of the triangles
-	d3ddev->SetRenderState(D3DRS_ZENABLE, TRUE);    // turn on the z-buffer
-	d3ddev->SetRenderState(D3DRS_AMBIENT, D3DCOLOR_XRGB(50, 50, 50)); //sets the ambient light
+	d3ddev->SetRenderState(D3DRS_LIGHTING, TRUE);						// turn off the 3D lighting
+	d3ddev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);				// both sides of the triangles
+	d3ddev->SetRenderState(D3DRS_ZENABLE, TRUE);						// turn on the z-buffer
+	d3ddev->SetRenderState(D3DRS_AMBIENT, D3DCOLOR_XRGB(50, 50, 50));	//sets the ambient light
 
 	/*PRE-DIRECTX
 	//Create context
@@ -180,6 +180,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	d3ddev->BeginScene();
 
 	//NOTE: direct primitive drawing
+
 	// select which vertex format we are using
 	d3ddev->SetFVF(CUSTOMFVF);
 
@@ -202,7 +203,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	D3DXMatrixLookAtLH(&matView,
 		&D3DXVECTOR3(0.0f, 0.0f, 10.0f),    // the camera position
-		&D3DXVECTOR3(0.0f, 0.0f, 0.0f),    // the look-at position
+		&D3DXVECTOR3(0.0f, 0.0f, 0.0f),		// the look-at position
 		&D3DXVECTOR3(0.0f, 1.0f, 0.0f));    // the up direction
 
 	d3ddev->SetTransform(D3DTS_VIEW, &matView);    // set the view transform to matView
@@ -210,14 +211,14 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	D3DXMATRIX matProjection;     // the projection transform matrix
 
 	D3DXMatrixPerspectiveFovLH(&matProjection,
-		D3DXToRadian(45),    // the horizontal field of view
+		D3DXToRadian(45),							// the horizontal field of view
 		(FLOAT)SCREEN_WIDTH / (FLOAT)SCREEN_HEIGHT, // aspect ratio
-		1.0f,    // the near view-plane
-		100.0f);    // the far view-plane
+		1.0f,										// the near view-plane
+		100.0f);									// the far view-plane
 
 	d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);    // set the projection
 
-															   // select the vertex buffer to display
+	// select the vertex buffer to display
 	d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
 	d3ddev->SetIndices(i_buffer);
 
@@ -231,6 +232,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	d3ddev->EndScene();
 
 	d3ddev->Present(NULL, NULL, NULL, NULL);
+
+
 	//PRE-DIRECTX
 	//SDL_GL_SwapWindow(App->window->window);
 	return UPDATE_CONTINUE;
@@ -241,6 +244,9 @@ bool ModuleRenderer3D::CleanUp()
 {
 	LOG("Destroying 3D Renderer");
 
+	
+	i_buffer->Release();
+	v_buffer->Release();
 	d3ddev->Release();
 	d3d->Release();
 	//SDL_GL_DeleteContext(context);
@@ -308,7 +314,7 @@ void ModuleRenderer3D::init_graphics()
 
 
 
-											   //Pyramid
+											   //Pyramid without lightning
 											   /*{0.0f, 2.0f, 0.0f, D3DCOLOR_XRGB(0,0,255),}, //0
 											   {-2.0f, -2.0f, -2.0f, D3DCOLOR_XRGB(0,255,0),}, //1
 											   {2.0f, -2.0f, -2.0f, D3DCOLOR_XRGB(255,0,0),}, //2
