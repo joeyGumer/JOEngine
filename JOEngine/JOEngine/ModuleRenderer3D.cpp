@@ -7,8 +7,8 @@
 #include "DirectX9/Include/d3dx9.h"
 
 // include the Direct3D Library files
-#pragma comment (lib, "DirectX9/Lib/x64/d3d9.lib")
-#pragma comment (lib, "DirectX9/Lib/x64/d3dx9.lib")
+#pragma comment (lib, "DirectX9/Lib/x86/d3d9.lib")
+#pragma comment (lib, "DirectX9/Lib/x86/d3dx9.lib")
 
 #define CUSTOMFVF (D3DFVF_XYZ | D3DFVF_NORMAL)
 struct CUSTOMVERTEX { FLOAT X, Y, Z; D3DVECTOR NORMAL; };
@@ -16,7 +16,7 @@ struct CUSTOMVERTEX { FLOAT X, Y, Z; D3DVECTOR NORMAL; };
 //WARNING: this should go as a member of ModuleRender3D
 LPDIRECT3D9 d3d; // the pointer to out Direct3D interface
 LPDIRECT3DDEVICE9 d3ddev; // the pointer to the device class
-LPDIRECT3DVERTEXBUFFER9 v_buffer = NULL;    // the pointer to the vertex buffer
+LPDIRECT3DVERTEXBUFFER9 v_buffer = NULL;  // the pointer to the vertex buffer
 LPDIRECT3DINDEXBUFFER9 i_buffer = NULL;  // the pointer to the index buffer
 
 ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)

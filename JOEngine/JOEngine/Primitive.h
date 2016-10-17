@@ -6,7 +6,7 @@
 #include "Math.h"
 
 
-enum PrimitiveTypes
+/*enum PrimitiveTypes
 {
 	Primitive_Point,
 	Primitive_Line,
@@ -95,7 +95,7 @@ public:
 public:
 	float3 normal;
 	float constant;
-};
+};*/
 
 
 #endif _PRIMITIVE_H_
