@@ -17,6 +17,10 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 {
 	switch (message)
 	{
+	case WM_SYSCOMMAND:
+		if ((wParam & 0xfff0) == SC_KEYMENU) // Disable ALT application menu
+			return 0;
+		break;
 	case WM_DESTROY:
 	{
 		PostQuitMessage(0);
@@ -116,6 +120,7 @@ bool ModuleWindow::Init()
 	return ret;
 }
 
+
 // Called before quitting
 bool ModuleWindow::CleanUp()
 {
@@ -130,6 +135,23 @@ bool ModuleWindow::CleanUp()
 	//Quit SDL subsystems
 	SDL_Quit();
 	return true;
+}
+
+update_status ModuleWindow::PreUpdate(float dt)
+{
+	//Handling window events
+	MSG msg;
+
+	while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	if (msg.message == WM_QUIT)
+		return UPDATE_STOP;
+
+	return UPDATE_CONTINUE;
 }
 
 void ModuleWindow::SetTitle(const char* title)

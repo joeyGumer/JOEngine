@@ -3,9 +3,8 @@
 
 
 //IMGUI 
-/*#include "Imgui\imgui.h"
-#include "Imgui\imgui_impl_sdl_gl3.h"
-#include "Imgui\GL\gl3w.h"
+#include "Imgui\imgui.h"
+#include "Imgui\imgui_impl_dx9.h"
 
 
 //Constructor
@@ -23,9 +22,7 @@ ModuleEditor::~ModuleEditor()
 //Start
 bool ModuleEditor::Start()
 {
-	gl3wInit();
-
-	ImGui_ImplSdlGL3_Init(App->window->window);
+	ImGui_ImplDX9_Init(App->window->hWnd, App->renderer3D->d3ddev);
 
 	return true;
 }
@@ -33,7 +30,7 @@ bool ModuleEditor::Start()
 //CleanUp
 bool ModuleEditor::CleanUp()
 {
-	ImGui_ImplSdlGL3_Shutdown();
+	ImGui_ImplDX9_Shutdown();
 
 	return true;
 }
@@ -41,12 +38,27 @@ bool ModuleEditor::CleanUp()
 //Preupdate
 update_status ModuleEditor::PreUpdate(float dt)
 {
-	ImGui_ImplSdlGL3_NewFrame(App->window->window);
-	return UPDATE_CONTINUE;
+	ImGui_ImplDX9_NewFrame();
+
+	update_status ret = UPDATE_CONTINUE;
+
+	
+	return ret;
+
 }
 
 //Update
 update_status ModuleEditor::Update(float dt)
+{
+
+	update_status ret = UPDATE_CONTINUE;
+
+
+	return ret;
+}
+
+//PostUpdate
+update_status ModuleEditor::PostUpdate(float dt)
 {
 	update_status ret = UPDATE_CONTINUE;
 
@@ -67,19 +79,21 @@ update_status ModuleEditor::Update(float dt)
 		ImGui::EndMainMenuBar();
 	}
 
-	//Renders what is suposed to
+	if (App->renderer3D->d3ddev->BeginScene() >= 0)
+	{
 	ImGui::Render();
-
+	App->renderer3D->d3ddev->EndScene();
+	}
+	
+	App->renderer3D->d3ddev->Present(NULL, NULL, NULL, NULL);
 
 	return ret;
 }
 
-//PostUpdate
-update_status ModuleEditor::PostUpdate(float dt)
+
+void ModuleEditor::RenderEditor()
 {
+	
 
-	return UPDATE_CONTINUE;
+	//ImGui::Render();
 }
-*/
-
-

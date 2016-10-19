@@ -1,9 +1,10 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleEditor.h"
 
 
-#include "DirectX9/Include/d3d9.h"
+//#include "DirectX9/Include/d3d9.h"
 #include "DirectX9/Include/d3dx9.h"
 
 // include the Direct3D Library files
@@ -14,10 +15,10 @@
 struct CUSTOMVERTEX { FLOAT X, Y, Z; D3DVECTOR NORMAL; };
 
 //WARNING: this should go as a member of ModuleRender3D
-LPDIRECT3D9 d3d; // the pointer to out Direct3D interface
+/*LPDIRECT3D9 d3d; // the pointer to out Direct3D interface
 LPDIRECT3DDEVICE9 d3ddev; // the pointer to the device class
 LPDIRECT3DVERTEXBUFFER9 v_buffer = NULL;  // the pointer to the vertex buffer
-LPDIRECT3DINDEXBUFFER9 i_buffer = NULL;  // the pointer to the index buffer
+LPDIRECT3DINDEXBUFFER9 i_buffer = NULL;  // the pointer to the index buffer*/
 
 ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -36,7 +37,7 @@ bool ModuleRenderer3D::Init()
 	d3d = Direct3DCreate9(D3D_SDK_VERSION);
 
 	D3DPRESENT_PARAMETERS d3dpp;
-
+	
 	ZeroMemory(&d3dpp, sizeof(d3dpp));
 	d3dpp.Windowed = TRUE;
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
@@ -47,6 +48,7 @@ bool ModuleRenderer3D::Init()
 	d3dpp.EnableAutoDepthStencil = TRUE;
 	d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
 
+	
 	// create a device class using this information and the info from the d3dpp stuct
 	d3d->CreateDevice(D3DADAPTER_DEFAULT,
 		D3DDEVTYPE_HAL,
@@ -226,12 +228,13 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	//d3ddev->SetTransform(D3DTS_WORLD, &(matTranslateA * matRotateY));
 	d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 24, 0, 12);
 
-
+	//Editor render
+	App->editor->RenderEditor();
 	//
 
 	d3ddev->EndScene();
 
-	d3ddev->Present(NULL, NULL, NULL, NULL);
+	//d3ddev->Present(NULL, NULL, NULL, NULL);
 
 
 	//PRE-DIRECTX

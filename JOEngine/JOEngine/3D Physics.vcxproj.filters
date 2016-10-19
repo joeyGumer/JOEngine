@@ -87,12 +87,6 @@
     <ClInclude Include="Imgui\imgui.h">
       <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="Imgui\imgui_impl_sdl_gl3.h">
-      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Imgui\GL\gl3w.h">
-      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
-    </ClInclude>
     <ClInclude Include="Imgui\imconfig.h">
       <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClInclude>
@@ -153,6 +147,9 @@
     <ClInclude Include="MathGeoLib\Include\MathGeoLibFwd.h">
       <Filter>Sources\Extern Tools/Libs\MathGeoLib</Filter>
     </ClInclude>
+    <ClInclude Include="Imgui\imgui_impl_dx9.h">
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="log.cpp">
@@ -177,12 +174,6 @@
       <Filter>Sources\Modules\Game</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui.cpp">
-      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Imgui\imgui_impl_sdl_gl3.cpp">
-      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="Imgui\GL\gl3w.c">
       <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_demo.cpp">
@@ -220,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="Primitive.cpp">
       <Filter>Sources\Helpers\Primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="Imgui\imgui_impl_dx9.cpp">
+      <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

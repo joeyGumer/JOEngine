@@ -9,7 +9,7 @@ class Application;
 
 class ModuleEditor : public Module
 {
-/*public:
+public:
 
 	ModuleEditor(Application* parent, bool start_enabled = true);
 	~ModuleEditor();
@@ -20,8 +20,10 @@ class ModuleEditor : public Module
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
+	void RenderEditor();
+
 private:
-*/
+
 };
 
 
