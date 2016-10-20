@@ -47,7 +47,9 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-
+	//Utilities
+	void Application::RequestBrowser(const char * url) const;
+	
 
 private:
 

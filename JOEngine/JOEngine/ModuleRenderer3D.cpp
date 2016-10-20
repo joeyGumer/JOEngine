@@ -64,6 +64,7 @@ bool ModuleRenderer3D::Init()
 	d3ddev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);				// both sides of the triangles
 	d3ddev->SetRenderState(D3DRS_ZENABLE, TRUE);						// turn on the z-buffer
 	d3ddev->SetRenderState(D3DRS_AMBIENT, D3DCOLOR_XRGB(50, 50, 50));	//sets the ambient light
+	d3ddev->SetRenderState(D3DRS_NORMALIZENORMALS, TRUE);				//makes the normals to be normalized when objects are modified
 
 	/*PRE-DIRECTX
 	//Create context

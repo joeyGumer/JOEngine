@@ -62,20 +62,41 @@ update_status ModuleEditor::PostUpdate(float dt)
 {
 	update_status ret = UPDATE_CONTINUE;
 
-	static bool show_test_window = true;
+	static bool show_test_window = false;
 
 	//Test Window to know how ImGui buttons works
-	ImGui::ShowTestWindow(&show_test_window);
+	if(show_test_window)
+		ImGui::ShowTestWindow(&show_test_window);
 
-	//Main menu
+	//Main menu----------------------------
 	if (ImGui::BeginMainMenuBar())
 	{
 		//Quit Button
-		if (ImGui::MenuItem("Quit"))
+		/*if (ImGui::MenuItem("Quit"))
 		{
 			ret = UPDATE_STOP;
-		}
+			ImGui::EndM
+		}*/
 
+		//Help Button
+		if (ImGui::BeginMenu("Help"))
+		{
+			if (ImGui::MenuItem("Gui Demo"))
+				show_test_window = !show_test_window;
+
+			if (ImGui::MenuItem("Documentation"))
+				App->RequestBrowser("https://github.com/joeyGumer/JOEngine/wiki");
+
+			if (ImGui::MenuItem("Download last"))
+				App->RequestBrowser("https://github.com/joeyGumer/JOEngine/releases");
+
+			if (ImGui::MenuItem("Report a bug"))
+				App->RequestBrowser("https://github.com/joeyGumer/JOEngine/issues");
+
+			//if(ImGui::)
+			
+			ImGui::EndMenu();
+		}
 		ImGui::EndMainMenuBar();
 	}
 
