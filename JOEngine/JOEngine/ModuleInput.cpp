@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
+#include <windowsx.h>
 
 #define MAX_KEYS 300
 
@@ -84,7 +85,7 @@ update_status ModuleInput::PreUpdate(float dt)
 	mouse_x_motion = mouse_y_motion = 0;
 
 	bool quit = false;
-	SDL_Event e;
+	/*SDL_Event e;
 	while(SDL_PollEvent(&e))
 	{
 		switch(e.type)
@@ -112,7 +113,37 @@ update_status ModuleInput::PreUpdate(float dt)
 					//App->renderer3D->OnResize(e.window.data1, e.window.data2);
 			}
 		}
+	}*/
+	//Windows input handler
+	MSG msg;
+	while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
 	}
+
+	switch (msg.message)
+	{
+		case WM_MOUSEWHEEL:
+		{
+			mouse_z = GET_WHEEL_DELTA_WPARAM(msg.wParam);
+			break;
+		}
+		case WM_MOUSEMOVE:
+		{
+			mouse_x = GET_X_LPARAM(msg.lParam);
+			mouse_y = GET_Y_LPARAM(msg.lParam);
+			
+			break;
+		}
+		case WM_QUIT:
+		{
+			return UPDATE_STOP;
+			break;
+		}
+	}
+
+	//
 
 	if(quit == true || keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
 		return UPDATE_STOP;

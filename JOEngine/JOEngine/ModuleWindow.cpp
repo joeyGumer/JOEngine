@@ -1,6 +1,12 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleWindow.h"
+#include "ModuleRenderer3D.h"
+
+
+//IMGUI NOTE: Should I do this?
+#include "Imgui\imgui.h"
+#include "Imgui\imgui_impl_dx9.h"
 
 ModuleWindow::ModuleWindow(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -13,10 +19,26 @@ ModuleWindow::~ModuleWindow()
 }
 
 // NOTE: declaring WindowProc here due to some errors in previous initialization
+extern LRESULT ImGui_ImplDX9_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	if (ImGui_ImplDX9_WndProcHandler(hWnd, message, wParam, lParam))
+		return true;
+
 	switch (message)
 	{
+	/*case WM_SIZE:
+		if (App->render->d3ddev != NULL && wParam != SIZE_MINIMIZED)
+		{
+			ImGui_ImplDX9_InvalidateDeviceObjects();
+			g_d3dpp.BackBufferWidth = LOWORD(lParam);
+			g_d3dpp.BackBufferHeight = HIWORD(lParam);
+			HRESULT hr = g_pd3dDevice->Reset(&g_d3dpp);
+			if (hr == D3DERR_INVALIDCALL)
+				IM_ASSERT(0);
+			ImGui_ImplDX9_CreateDeviceObjects();
+		}
+		return 0;*/
 	case WM_SYSCOMMAND:
 		if ((wParam & 0xfff0) == SC_KEYMENU) // Disable ALT application menu
 			return 0;
@@ -80,7 +102,8 @@ bool ModuleWindow::Init()
 			
 
 		// display the window on the screen
-		ShowWindow(hWnd, 1);
+		ShowWindow(hWnd, SW_SHOWDEFAULT);
+		
 
 		//PRE-DIRECTX CODE
 		/*if(WIN_FULLSCREEN == true)
@@ -140,7 +163,7 @@ bool ModuleWindow::CleanUp()
 update_status ModuleWindow::PreUpdate(float dt)
 {
 	//Handling window events
-	MSG msg;
+	/*MSG msg;
 
 	while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 	{
@@ -149,7 +172,7 @@ update_status ModuleWindow::PreUpdate(float dt)
 	}
 
 	if (msg.message == WM_QUIT)
-		return UPDATE_STOP;
+		return UPDATE_STOP;*/
 
 	return UPDATE_CONTINUE;
 }

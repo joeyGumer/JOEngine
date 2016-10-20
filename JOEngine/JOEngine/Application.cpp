@@ -165,3 +165,17 @@ void Application::AddModule(Module* mod)
 {
 	list_modules.add(mod);
 }
+
+//WARNING
+/*LRESULT CALLBACK Application::WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	Application* app = static_cast<Application*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
+	if (app) return app->RealWindowProc(hWnd, message, wParam, lParam);
+	return DefWindowProc(hWnd, message, wParam, lParam);
+}
+
+LRESULT CALLBACK Application::RealWindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	//All message handling goes here
+	return DefWindowProc(hWnd, message, wParam, lParam);
+}*/
