@@ -55,6 +55,12 @@
     <Filter Include="Sources\Helpers\Primitive">
       <UniqueIdentifier>{640c7f4b-b899-4382-a217-34bee94e8ff2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Extern Tools/Libs\Timer">
+      <UniqueIdentifier>{e4172c0a-b57c-4be6-90c9-80d92fecd8fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Extern Tools/Libs\Random">
+      <UniqueIdentifier>{c4ec09f3-b19b-4c1c-b315-95af0767bcbb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -101,9 +107,6 @@
     </ClInclude>
     <ClInclude Include="Imgui\stb_truetype.h">
       <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Sources\Extern Tools/Libs</Filter>
     </ClInclude>
     <ClInclude Include="MathGeoLib\Include\MathBuildConfig.h">
       <Filter>Sources\Extern Tools/Libs\MathGeoLib</Filter>
@@ -153,12 +156,15 @@
     <ClInclude Include="WindowProc.h">
       <Filter>Sources\Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Sources\Extern Tools/Libs\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Sources\Extern Tools/Libs\Random</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="log.cpp">
-      <Filter>Sources\Extern Tools/Libs</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
       <Filter>Sources\Extern Tools/Libs</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
@@ -220,6 +226,12 @@
     </ClCompile>
     <ClCompile Include="WindowProc.cpp">
       <Filter>Sources\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Sources\Extern Tools/Libs\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Sources\Extern Tools/Libs\Random</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

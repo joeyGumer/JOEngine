@@ -105,6 +105,7 @@
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="PhysBody3D.h" />
     <ClInclude Include="Primitive.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="WindowProc.h" />
   </ItemGroup>
@@ -129,6 +130,7 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="PhysBody3D.cpp" />
     <ClCompile Include="Primitive.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="WindowProc.cpp" />
   </ItemGroup>
