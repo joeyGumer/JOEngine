@@ -5,9 +5,7 @@
 #include "WindowProc.h"
 
 
-//IMGUI NOTE: Should I do this?
-//#include "Imgui\imgui.h"
-//#include "Imgui\imgui_impl_dx9.h"
+
 
 ModuleWindow::ModuleWindow(Application* app, bool start_enabled) : Module(app, start_enabled)
 {

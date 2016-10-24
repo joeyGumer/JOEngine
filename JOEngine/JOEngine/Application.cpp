@@ -176,20 +176,6 @@ void Application::RequestBrowser(const char * url) const
 	ShellExecuteA(NULL, "open", url, NULL, NULL, SW_SHOWNORMAL);
 }
 
-//WARNING
-/*LRESULT CALLBACK Application::WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	Application* app = static_cast<Application*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
-	if (app) return app->RealWindowProc(hWnd, message, wParam, lParam);
-	return DefWindowProc(hWnd, message, wParam, lParam);
-}
-
-LRESULT CALLBACK Application::RealWindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	//All message handling goes here
-	return DefWindowProc(hWnd, message, wParam, lParam);
-}*/
-
 
 //WINDOWPROC
 extern LRESULT ImGui_ImplDX9_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);

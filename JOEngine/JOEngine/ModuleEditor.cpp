@@ -71,12 +71,14 @@ update_status ModuleEditor::PostUpdate(float dt)
 	//Main menu----------------------------
 	if (ImGui::BeginMainMenuBar())
 	{
-		//Quit Button
-		/*if (ImGui::MenuItem("Quit"))
+		//File
+		if (ImGui::BeginMenu("File"))
 		{
-			ret = UPDATE_STOP;
-			ImGui::EndM
-		}*/
+			if (ImGui::MenuItem("Exit"))
+				ret = UPDATE_STOP;
+
+			ImGui::EndMenu();
+		}
 
 		//Help Button
 		if (ImGui::BeginMenu("Help"))
@@ -97,15 +99,32 @@ update_status ModuleEditor::PostUpdate(float dt)
 			
 			ImGui::EndMenu();
 		}
+
+		//Motor Configuration
+		if (ImGui::BeginMenu("Configuration"))
+		{
+			
+			ImGui::EndMenu();
+		}
+
+		//About
+		if (ImGui::BeginMenu("About"))
+		{
+
+			ImGui::EndMenu();
+		}
+
+
 		ImGui::EndMainMenuBar();
 	}
 
+	//NOTE: do it here?
 	if (App->renderer3D->d3ddev->BeginScene() >= 0)
 	{
 	ImGui::Render();
 	App->renderer3D->d3ddev->EndScene();
 	}
-	
+
 	App->renderer3D->d3ddev->Present(NULL, NULL, NULL, NULL);
 
 	return ret;
