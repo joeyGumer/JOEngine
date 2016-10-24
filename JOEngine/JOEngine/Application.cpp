@@ -1,5 +1,10 @@
 #include "Application.h"
 
+//IMGUI 
+#include "Imgui\imgui.h"
+#include "Imgui\imgui_impl_dx9.h"
+
+
 Application::Application()
 {
 	frames = 0;
@@ -184,3 +189,47 @@ LRESULT CALLBACK Application::RealWindowProc(HWND hWnd, UINT message, WPARAM wPa
 	//All message handling goes here
 	return DefWindowProc(hWnd, message, wParam, lParam);
 }*/
+
+
+//WINDOWPROC
+extern LRESULT ImGui_ImplDX9_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK Application::WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	
+	//App->editor
+	if (ImGui_ImplDX9_WndProcHandler(hWnd, message, wParam, lParam))
+		return true;
+
+	switch (message)
+	{
+		
+		case WM_SIZE:
+		if (App->renderer3D->d3ddev != NULL && wParam != SIZE_MINIMIZED)
+		{
+			/*App->renderer3D->d3ddev->BeginScene();
+			ImGui_ImplDX9_InvalidateDeviceObjects();
+			App->renderer3D->d3dpp.BackBufferWidth = LOWORD(lParam);
+			App->renderer3D->d3dpp.BackBufferHeight = HIWORD(lParam);
+			HRESULT hr = App->renderer3D->d3ddev->Reset(&(App->renderer3D->d3dpp));
+			if (hr == D3DERR_INVALIDCALL)
+				IM_ASSERT(0);
+
+			ImGui_ImplDX9_CreateDeviceObjects();*/
+		}
+		return 0;
+
+		case WM_SYSCOMMAND:
+			if ((wParam & 0xfff0) == SC_KEYMENU) // Disable ALT application menu
+			return 0;
+		break;
+
+		case WM_DESTROY:
+		{
+			PostQuitMessage(0);
+			return 0;
+		}	
+		break;
+	}
+
+	return DefWindowProc(hWnd, message, wParam, lParam);
+}

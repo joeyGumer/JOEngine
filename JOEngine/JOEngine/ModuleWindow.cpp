@@ -2,11 +2,12 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
+#include "WindowProc.h"
 
 
 //IMGUI NOTE: Should I do this?
-#include "Imgui\imgui.h"
-#include "Imgui\imgui_impl_dx9.h"
+//#include "Imgui\imgui.h"
+//#include "Imgui\imgui_impl_dx9.h"
 
 ModuleWindow::ModuleWindow(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -19,7 +20,7 @@ ModuleWindow::~ModuleWindow()
 }
 
 // NOTE: declaring WindowProc here due to some errors in previous initialization
-extern LRESULT ImGui_ImplDX9_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+/*extern LRESULT ImGui_ImplDX9_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (ImGui_ImplDX9_WndProcHandler(hWnd, message, wParam, lParam))
@@ -38,7 +39,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 				IM_ASSERT(0);
 			ImGui_ImplDX9_CreateDeviceObjects();
 		}
-		return 0;*/
+		return 0;
 	case WM_SYSCOMMAND:
 		if ((wParam & 0xfff0) == SC_KEYMENU) // Disable ALT application menu
 			return 0;
@@ -51,7 +52,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 	}
 
 	return DefWindowProc(hWnd, message, wParam, lParam);
-}
+}*/
 
 // Called before render is available
 bool ModuleWindow::Init()
@@ -75,7 +76,7 @@ bool ModuleWindow::Init()
 		// fill in the struct with the needed information
 		wc.cbSize = sizeof(WNDCLASSEX);
 		wc.style = CS_HREDRAW | CS_VREDRAW;
-		wc.lpfnWndProc = WindowProc;
+		wc.lpfnWndProc = App->WindowProc;
 		wc.hInstance = GetModuleHandle(0);
 		wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 		wc.hbrBackground = (HBRUSH)COLOR_WINDOW;

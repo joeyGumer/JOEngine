@@ -22,6 +22,7 @@ LPDIRECT3DINDEXBUFFER9 i_buffer = NULL;  // the pointer to the index buffer*/
 
 ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+	d3ddev = NULL;
 }
 
 // Destructor

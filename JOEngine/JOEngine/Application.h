@@ -49,13 +49,16 @@ public:
 
 	//Utilities
 	void Application::RequestBrowser(const char * url) const;
-	
 
+	//WinProc
+	static LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+	
 private:
 
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();
 
-
 };
+
+extern Application* App;

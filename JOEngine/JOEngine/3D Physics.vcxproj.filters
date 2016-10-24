@@ -150,6 +150,9 @@
     <ClInclude Include="Imgui\imgui_impl_dx9.h">
       <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
     </ClInclude>
+    <ClInclude Include="WindowProc.h">
+      <Filter>Sources\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="log.cpp">
@@ -214,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="Imgui\imgui_impl_dx9.cpp">
       <Filter>Sources\Extern Tools/Libs\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowProc.cpp">
+      <Filter>Sources\Helpers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
