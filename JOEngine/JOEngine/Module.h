@@ -1,6 +1,9 @@
-#pragma once
+#ifndef _MODULE_H_
+#define _MODULE_H_
 
 #include "globals.h"
+#include <string>
+
 class Application;
 struct PhysBody3D;
 
@@ -73,4 +76,9 @@ public:
 
 	virtual void OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 	{ }
+
+public:
+	std::string name;
 };
+
+#endif _MODULE_H_

@@ -61,6 +61,12 @@
     <Filter Include="Sources\Extern Tools/Libs\Random">
       <UniqueIdentifier>{c4ec09f3-b19b-4c1c-b315-95af0767bcbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Modules\FileSystem">
+      <UniqueIdentifier>{c59da399-2326-4264-8649-1797e74defaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Modules\FBXLoad">
+      <UniqueIdentifier>{8d8688f6-6803-478c-8145-69dc42ddcaae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -162,6 +168,12 @@
     <ClInclude Include="Random.h">
       <Filter>Sources\Extern Tools/Libs\Random</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleFileSystem.h">
+      <Filter>Sources\Modules\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFBXLoad.h">
+      <Filter>Sources\Modules\FBXLoad</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="log.cpp">
@@ -232,6 +244,12 @@
     </ClCompile>
     <ClCompile Include="Random.cpp">
       <Filter>Sources\Extern Tools/Libs\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFileSystem.cpp">
+      <Filter>Sources\Modules\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFBXLoad.cpp">
+      <Filter>Sources\Modules\FBXLoad</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
