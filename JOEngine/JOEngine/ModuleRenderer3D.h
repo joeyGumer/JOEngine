@@ -1,13 +1,14 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
+#include "DirectXGlobals.h"
 #include "Light.h"
-
+#include <vector>
 #define MAX_LIGHTS 8
 
 //WARNING: provisional
-#include "DirectX9/Include/d3d9.h"
 
+struct Mesh;
 
 class ModuleRenderer3D : public Module
 {
@@ -16,6 +17,7 @@ public:
 	~ModuleRenderer3D();
 
 	bool Init();
+	bool Start();
 	update_status PreUpdate(float dt);
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
@@ -24,6 +26,9 @@ public:
 	//void OnResize(int width, int height);
 	void init_graphics();
 	void init_light();
+	void LoadMeshes(Mesh* m, uint size);
+
+	void Draw(const Mesh &m);
 
 public:
 
@@ -43,4 +48,10 @@ public:
 	LPDIRECT3DDEVICE9 d3ddev = NULL; // the pointer to the device class
 	LPDIRECT3DVERTEXBUFFER9 v_buffer = NULL;  // the pointer to the vertex buffer
 	LPDIRECT3DINDEXBUFFER9 i_buffer = NULL;  // the pointer to the index buffer*/
+
+
+	//Provisional
+private:
+	std::vector<Mesh> meshes;
+	uint num_meshes;
 };

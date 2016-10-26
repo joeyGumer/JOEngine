@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleEditor.h"
-
+#include "ModuleGeometryLoader.h"
 
 //#include "DirectX9/Include/d3d9.h"
 #include "DirectX9/Include/d3dx9.h"
@@ -11,14 +11,8 @@
 #pragma comment (lib, "DirectX9/Lib/x86/d3d9.lib")
 #pragma comment (lib, "DirectX9/Lib/x86/d3dx9.lib")
 
-#define CUSTOMFVF (D3DFVF_XYZ | D3DFVF_NORMAL)
-struct CUSTOMVERTEX { FLOAT X, Y, Z; D3DVECTOR NORMAL; };
 
-//WARNING: this should go as a member of ModuleRender3D
-/*LPDIRECT3D9 d3d; // the pointer to out Direct3D interface
-LPDIRECT3DDEVICE9 d3ddev; // the pointer to the device class
-LPDIRECT3DVERTEXBUFFER9 v_buffer = NULL;  // the pointer to the vertex buffer
-LPDIRECT3DINDEXBUFFER9 i_buffer = NULL;  // the pointer to the index buffer*/
+
 
 ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -150,10 +144,18 @@ bool ModuleRenderer3D::Init()
 	return ret;
 }
 
+bool ModuleRenderer3D::Start()
+{
+	num_meshes = App->geoload->LoadFBX("Brutus.fbx");
+
+	return true;
+}
 
 // PreUpdate: clear buffer
 update_status ModuleRenderer3D::PreUpdate(float dt)
 {
+	
+	
 	d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 	d3ddev->Clear(0, NULL, D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 	/*PRE-DIRECTX
@@ -194,15 +196,15 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	D3DXMATRIX matRotateX;
 
 
-	static float index = 0.0f; index += 0.05f;
+	/*static float index = 0.0f; index += 0.05f;
 
 	D3DXMatrixRotationY(&matRotateY, index);
 	D3DXMatrixRotationX(&matRotateX, index * 2);
 
-	d3ddev->SetTransform(D3DTS_WORLD, &(matRotateY));
+	d3ddev->SetTransform(D3DTS_WORLD, &(matRotateY));*/
 	// tell Direct3D about our matrix
 
-
+	//VIEW MATRIX
 	D3DXMATRIX matView;    // the view transform matrix
 
 	D3DXMatrixLookAtLH(&matView,
@@ -212,6 +214,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	d3ddev->SetTransform(D3DTS_VIEW, &matView);    // set the view transform to matView
 
+	//PROJECTION MATRIX
 	D3DXMATRIX matProjection;     // the projection transform matrix
 
 	D3DXMatrixPerspectiveFovLH(&matProjection,
@@ -223,13 +226,17 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);    // set the projection
 
 	// select the vertex buffer to display
-	d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
+	/*d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
 	d3ddev->SetIndices(i_buffer);
 
 
 	//d3ddev->SetTransform(D3DTS_WORLD, &(matTranslateA * matRotateY));
-	d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 24, 0, 12);
+	d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 24, 0, 12);*/
 
+	for (int i = 0; i < num_meshes; i++)
+	{
+		Draw(meshes[i]);
+	}
 	//Editor render
 	App->editor->RenderEditor();
 	//
@@ -237,7 +244,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	d3ddev->EndScene();
 
 	//d3ddev->Present(NULL, NULL, NULL, NULL);
-
+	
 
 	//PRE-DIRECTX
 	//SDL_GL_SwapWindow(App->window->window);
@@ -399,4 +406,23 @@ void ModuleRenderer3D::init_light()
 	material.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);    // set ambient color to white
 
 	d3ddev->SetMaterial(&material);    // set the globably-used material to &material
+}
+
+void ModuleRenderer3D::LoadMeshes(Mesh* m, uint size)
+{
+	
+	for (int i = 0; i < size; i++)
+	{
+		meshes.push_back(m[i]);
+	}
+}
+
+
+void ModuleRenderer3D::Draw(const Mesh &m)
+{
+	d3ddev->SetStreamSource(0, m.v_buffer, 0, sizeof(CUSTOMVERTEX));
+	d3ddev->SetIndices(m.i_buffer);
+
+
+	d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m.num_vertices, 0, m.num_triangles);
 }

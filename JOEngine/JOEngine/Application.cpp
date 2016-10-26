@@ -19,6 +19,7 @@ Application::Application()
 	scene_intro = new ModuleSceneIntro(this);
 	//physics3D = new ModulePhysics3D(this);
 	renderer3D = new ModuleRenderer3D(this);
+	geoload = new ModuleGeometryLoader(this);
 	//camera = new ModuleCamera3D(this);
 	editor = new ModuleEditor(this);
 
@@ -30,6 +31,8 @@ Application::Application()
 	AddModule(window);
 	//AddModule(physics3D);
 	AddModule(renderer3D);
+	//WARNING : provisional module
+	AddModule(geoload);
 	//AddModule(camera);
 	AddModule(input);
 	AddModule(audio);

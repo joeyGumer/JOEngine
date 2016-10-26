@@ -171,7 +171,10 @@
     <ClInclude Include="ModuleFileSystem.h">
       <Filter>Sources\Modules\FileSystem</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleFBXLoad.h">
+    <ClInclude Include="DirectXGlobals.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleGeometryLoader.h">
       <Filter>Sources\Modules\FBXLoad</Filter>
     </ClInclude>
   </ItemGroup>
@@ -248,7 +251,7 @@
     <ClCompile Include="ModuleFileSystem.cpp">
       <Filter>Sources\Modules\FileSystem</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleFBXLoad.cpp">
+    <ClCompile Include="ModuleGeometryLoader.cpp">
       <Filter>Sources\Modules\FBXLoad</Filter>
     </ClCompile>
   </ItemGroup>
