@@ -194,8 +194,11 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	//transform
 	D3DXMATRIX matRotateY;
 	D3DXMATRIX matRotateX;
+	
+	D3DXMATRIX matTranslatE;
+	D3DXMatrixTranslation(&matTranslatE, 0, 20.0f, -100.0f);
 
-
+	//d3ddev->SetTransform(D3DTS_WORLD, &(matTranslatE));
 	/*static float index = 0.0f; index += 0.05f;
 
 	D3DXMatrixRotationY(&matRotateY, index);
@@ -226,12 +229,12 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);    // set the projection
 
 	// select the vertex buffer to display
-	/*d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
+	d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
 	d3ddev->SetIndices(i_buffer);
 
 
 	//d3ddev->SetTransform(D3DTS_WORLD, &(matTranslateA * matRotateY));
-	d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 24, 0, 12);*/
+	d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 24, 0, 12);
 
 	for (int i = 0; i < num_meshes; i++)
 	{
@@ -424,5 +427,8 @@ void ModuleRenderer3D::Draw(const Mesh &m)
 	d3ddev->SetIndices(m.i_buffer);
 
 
-	d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m.num_vertices, 0, m.num_triangles);
+	
+	HRESULT f = d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m.num_vertices, 0, m.num_triangles);
+	if (FAILED(f)) 
+		LOG("failed to draw vertex buffer.", f);
 }
