@@ -35,14 +35,13 @@
 
 MATH_BEGIN_NAMESPACE
 
-
 float3x3::float3x3(float _00, float _01, float _02,
-	float _10, float _11, float _12,
-	float _20, float _21, float _22)
+                   float _10, float _11, float _12,
+                   float _20, float _21, float _22)
 {
 	Set(_00, _01, _02,
-		_10, _11, _12,
-		_20, _21, _22);
+	    _10, _11, _12,
+	    _20, _21, _22);
 }
 
 float3x3::float3x3(const float3 &col0, const float3 &col1, const float3 &col2)

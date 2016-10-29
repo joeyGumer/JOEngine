@@ -15,6 +15,10 @@
 /** @file Clock.cpp
 	@brief */
 
+#include <time.h>
+#include <errno.h>
+
+
 #if defined(__unix__) || defined(__native_client__) || defined(EMSCRIPTEN) || defined(ANDROID) || defined(__APPLE__) || defined (__CYGWIN__)
 #include <time.h>
 #include <errno.h>
@@ -104,12 +108,13 @@ void Clock::Sleep(int milliseconds)
 	::Sleep(milliseconds);
 #elif !defined(__native_client__) && !defined(EMSCRIPTEN)
 	// http://linux.die.net/man/2/nanosleep
-	timespec ts;
+	//NOTE: desactivated because  it's For linux and gave an error
+	/*timespec ts;
 	ts.tv_sec = milliseconds / 1000;
 	ts.tv_nsec = (milliseconds - ts.tv_sec * 1000) * 1000 * 1000;
 	int ret = nanosleep(&ts, NULL);
 	if (ret == -1)
-		LOGI("nanosleep returned -1! Reason: %s(%d).", strerror(errno), (int)errno);
+		LOGI("nanosleep returned -1! Reason: %s(%d).", strerror(errno), (int)errno);*/
 #else
 #warning Clock::Sleep has not been implemented!
 #endif
