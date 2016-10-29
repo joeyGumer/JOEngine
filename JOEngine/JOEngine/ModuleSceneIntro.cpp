@@ -21,7 +21,7 @@ bool ModuleSceneIntro::Start()
 	bool ret = true;
 
 	//App->camera->Move(float3(0, 10, -10));
-
+	
 	return ret;
 }
 
@@ -49,7 +49,10 @@ update_status ModuleSceneIntro::Update(float dt)
 	//pPlane(0, 1, 0, 0).Render();
 
 	
-
+	if (App->input->GetKey(SDL_SCANCODE_W))
+	{
+		int i = 0;
+	}
 	
 	
 	

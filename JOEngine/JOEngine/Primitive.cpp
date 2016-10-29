@@ -5,7 +5,15 @@
 #include "Primitive.h"
 #include "glut/glut.h"
 
+
+//NOTE: not sure about doing this
+#include "Application.h"
+#include "ModuleRenderer3D.h"
+
+
 #pragma comment (lib, "glut/glut32.lib")
+
+using namespace std;
 
 // ------------------------------------------------------------
 Primitive::Primitive() : transform(float4x4::identity), color(White), wire(false), axis(false), type(PrimitiveTypes::Primitive_Point)
@@ -17,6 +25,10 @@ PrimitiveTypes Primitive::GetType() const
 	return type;
 }
 
+void Primitive::Init()
+{
+
+}
 // ------------------------------------------------------------
 void Primitive::Render() const
 {
@@ -250,16 +262,55 @@ void pLine::InnerRender() const
 pPlane::pPlane() : Primitive(), normal(0, 1, 0), constant(1)
 {
 	type = PrimitiveTypes::Primitive_Plane;
+	Init();
 }
 
 pPlane::pPlane(float x, float y, float z, float d) : Primitive(), normal(x, y, z), constant(d)
 {
 	type = PrimitiveTypes::Primitive_Plane;
+	Init();
 }
 
+void pPlane::Init()
+{
+	float d = 200.0f;
+
+	for (float i = -d; i <= d; i += 1.0f)
+	{
+		
+		vertices.push_back({ i, 0.0f, -d , normal.x, normal.y, normal.z });
+		vertices.push_back({ i, 0.0f, d , normal.x, normal.y, normal.z });
+		vertices.push_back({ -d, 0.0f, i , normal.x, normal.y, normal.z });
+		vertices.push_back({ d, 0.0f, i , normal.x, normal.y, normal.z });
+	}
+
+	App->renderer3D->d3ddev->CreateVertexBuffer(24 * sizeof(CUSTOMVERTEX),
+		0,
+		CUSTOMFVF,
+		D3DPOOL_MANAGED,
+		&v_buffer,
+		NULL);
+
+	VOID* pVoid;    // a void pointer
+
+					// lock v_buffer and load the vertices into it
+	v_buffer->Lock(0, 0, (void**)&pVoid, 0);
+	memcpy(pVoid, &vertices, sizeof(vertices));
+	v_buffer->Unlock();
+}
 void pPlane::InnerRender() const
 {
-	glLineWidth(1.0f);
+	float d = 200.0f;
+	const int size = d * 2;
+	
+	App->renderer3D->d3ddev->BeginScene();
+
+	App->renderer3D->d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
+	//App->renderer3D->d3ddev->DrawIndexedPrimitive(D3DPT_LINELIST, 0, 0, 24, 0, 12);
+	App->renderer3D->d3ddev->DrawPrimitive(D3DPT_POINTLIST, 0, 200);
+
+	App->renderer3D->d3ddev->EndScene();
+	/*glLineWidth(1.0f);
 
 	glBegin(GL_LINES);
 
@@ -273,5 +324,5 @@ void pPlane::InnerRender() const
 		glVertex3f(d, 0.0f, i);
 	}
 
-	glEnd();
+	glEnd();*/
 }

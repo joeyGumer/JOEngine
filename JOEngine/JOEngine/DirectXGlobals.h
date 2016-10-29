@@ -7,5 +7,8 @@
 struct CUSTOMVERTEX { FLOAT X, Y, Z; D3DVECTOR NORMAL; };
 
 
+
+
+
 #endif _DIRECTXGLOBALS_H_
 

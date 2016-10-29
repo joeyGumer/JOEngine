@@ -207,9 +207,10 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	d3ddev->SetTransform(D3DTS_WORLD, &(matRotateY));*/
 	// tell Direct3D about our matrix
 
+	
 	//VIEW MATRIX
 	D3DXMATRIX matView;    // the view transform matrix
-
+	
 	D3DXMatrixLookAtLH(&matView,
 		&D3DXVECTOR3(0.0f, 0.0f, 10.0f),    // the camera position
 		&D3DXVECTOR3(0.0f, 0.0f, 0.0f),		// the look-at position

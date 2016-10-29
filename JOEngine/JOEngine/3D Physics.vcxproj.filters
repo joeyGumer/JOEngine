@@ -378,6 +378,9 @@
     <ClInclude Include="MathGeoLib\Include\Time\Clock.h">
       <Filter>Sources\Extern Tools/Libs\MathGeoLib\Time</Filter>
     </ClInclude>
+    <ClInclude Include="InputDefs.h">
+      <Filter>Sources\Modules\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="log.cpp">

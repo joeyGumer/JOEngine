@@ -4,6 +4,8 @@
 //#include "glmath.h"
 #include "Color.h"
 #include "Math.h"
+#include <vector>
+#include "DirectXGlobals.h"
 
 
 enum PrimitiveTypes
@@ -28,6 +30,8 @@ public:
 	void			SetRotation(float angle, const float3 &u);
 	void			Scale(float x, float y, float z);
 	PrimitiveTypes	GetType() const;
+protected:
+	virtual void	Init();
 
 public:
 	
@@ -37,6 +41,7 @@ public:
 
 protected:
 	PrimitiveTypes type;
+	std::vector<CUSTOMVERTEX> vertices;
 };
 
 // ============================================
@@ -92,9 +97,16 @@ public:
 	pPlane();
 	pPlane(float x, float y, float z, float d);
 	void InnerRender() const;
+
+private:
+	void Init();
+
 public:
 	float3 normal;
 	float constant;
+
+private:
+	LPDIRECT3DVERTEXBUFFER9 v_buffer;
 };
 
 

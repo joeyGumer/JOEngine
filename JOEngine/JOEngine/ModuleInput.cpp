@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleInput.h"
 #include <windowsx.h>
+#include <dinput.h>
 
 #define MAX_KEYS 300
 
@@ -20,6 +21,7 @@ ModuleInput::~ModuleInput()
 // Called before render is available
 bool ModuleInput::Init()
 {
+	//NOTE: this will need to be out
 	LOG("Init SDL input event system");
 	bool ret = true;
 	SDL_Init(0);
@@ -53,7 +55,7 @@ update_status ModuleInput::PreUpdate(float dt)
 		{
 			if(keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
 				keyboard[i] = KEY_UP;
-			else
+		else
 				keyboard[i] = KEY_IDLE;
 		}
 	}
