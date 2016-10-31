@@ -3,7 +3,7 @@
 #include "PhysBody3D.h"
 #include "ModuleCamera3D.h"
 
-/*ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	CalculateViewMatrix();
 
@@ -11,7 +11,7 @@
 	Y = float3(0.0f, 1.0f, 0.0f);
 	Z = float3(0.0f, 0.0f, 1.0f);
 
-	Position = float3(0.0f, 0.0f, 5.0f);
+	Position = float3(0.0f, 0.0f, 10.0f);
 	Reference = float3(0.0f, 0.0f, 0.0f);
 
 	following = NULL;
@@ -41,7 +41,8 @@ bool ModuleCamera3D::CleanUp()
 update_status ModuleCamera3D::Update(float dt)
 {
 	// Follow code
-	if(following != NULL)
+	// NOTE: may be useful in the future
+	/*if(following != NULL)
 	{
 		float4x4 m;
 		following->GetTransform(m.ptr());
@@ -64,15 +65,15 @@ update_status ModuleCamera3D::Update(float dt)
 			correctionFactor = 0.15*(max_following_dist - dist) / dist;
 		}
 		Position -= correctionFactor * cam_to_target;
-	}
+	}*/
 
 	// Implement a debug camera with keys and mouse
 
 	// OnKeys WASD keys -----------------------------------
-	float Speed = 5.0f;
+	/*float Speed = 5.0f;
 
-	if(App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) Speed *= 2.0f;
-	if(App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT) Speed *= 0.5f;
+	if(App->input->GetKey(VK_LSHIFT) == KEY_REPEAT) Speed *= 2.0f;
+	if(App->input->GetKey(VK_LMENU) == KEY_REPEAT) Speed *= 0.5f;
 
 	float Distance = Speed * dt;
 
@@ -86,19 +87,19 @@ update_status ModuleCamera3D::Update(float dt)
 
 	float3 Movement;
 
-	if(App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) Movement += Forward;
-	if(App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) Movement -= Forward;
-	if(App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) Movement -= Right;
-	if(App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) Movement += Right;
-	if(App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT) Movement += Up;
-	if(App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) Movement -= Up;
+	if(App->input->GetKey(VK_W) == KEY_REPEAT) Movement += Forward;
+	if(App->input->GetKey(VK_S) == KEY_REPEAT) Movement -= Forward;
+	if(App->input->GetKey(VK_A) == KEY_REPEAT) Movement -= Right;
+	if(App->input->GetKey(VK_D) == KEY_REPEAT) Movement += Right;
+	if(App->input->GetKey(VK_R) == KEY_REPEAT) Movement += Up;
+	if(App->input->GetKey(VK_F) == KEY_REPEAT) Movement -= Up;
 
 	Position += Movement;
 	Reference += Movement;
 	
 	// Mouse motion ----------------
 
-	if(App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
+	if(App->input->GetKey(VK_RBUTTON) == KEY_REPEAT)
 	{
 
 		int dx = -App->input->GetMouseXMotion();
@@ -118,10 +119,11 @@ update_status ModuleCamera3D::Update(float dt)
 			q.Transform(Y);
 			q.Transform(Z);
 	
+			//Code before MathGeoLib
 			/*X = rotate(X, DeltaX, float3(0.0f, 1.0f, 0.0f));
 			Y = rotate(Y, DeltaX, float3(0.0f, 1.0f, 0.0f));
-			Z = rotate(Z, DeltaX, float3(0.0f, 1.0f, 0.0f));
-		}
+			Z = rotate(Z, DeltaX, float3(0.0f, 1.0f, 0.0f));*/
+		/*}
 
 		if(dy != 0)
 		{
@@ -158,7 +160,7 @@ update_status ModuleCamera3D::Update(float dt)
 		Position -= Position * 0.1f;
 	}
 
-	Position += Reference;
+	Position += Reference;*/
 
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
@@ -221,4 +223,3 @@ void ModuleCamera3D::UnFollow()
 {
 	following = NULL;
 }
-*/

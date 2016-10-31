@@ -211,10 +211,11 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	//VIEW MATRIX
 	D3DXMATRIX matView;    // the view transform matrix
 	
-	D3DXMatrixLookAtLH(&matView,
+	/*D3DXMatrixLookAtLH(&matView,
 		&D3DXVECTOR3(0.0f, 0.0f, 10.0f),    // the camera position
 		&D3DXVECTOR3(0.0f, 0.0f, 0.0f),		// the look-at position
-		&D3DXVECTOR3(0.0f, 1.0f, 0.0f));    // the up direction
+		&D3DXVECTOR3(0.0f, 1.0f, 0.0f));    // the up direction*/
+	matView = App->camera->GetViewMatrix();
 
 	d3ddev->SetTransform(D3DTS_VIEW, &matView);    // set the view transform to matView
 

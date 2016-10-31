@@ -5,7 +5,7 @@
 
 class ModuleCamera3D : public Module
 {
-	/*
+
 public:
 	ModuleCamera3D(Application* app, bool start_enabled = true);
 	~ModuleCamera3D();
@@ -35,5 +35,5 @@ private:
 	float min_following_dist;
 	float max_following_dist;
 	float following_height;
-	*/
+	
 };
