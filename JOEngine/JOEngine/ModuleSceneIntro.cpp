@@ -3,6 +3,8 @@
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
 #include "PhysBody3D.h"
+#include "InputDefs.h"
+//#include "ModuleInput.h"
 
 
 
@@ -49,7 +51,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	//pPlane(0, 1, 0, 0).Render();
 
 	
-	if (App->input->GetKey(SDL_SCANCODE_W))
+	if (App->input->GetKey(VK_W) == KEY_UP)
 	{
 		int i = 0;
 	}
