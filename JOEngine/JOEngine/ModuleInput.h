@@ -1,6 +1,9 @@
-#pragma once
+#ifndef _MODULEINPUT_H_
+#define _MODULEINPUT_H_
+
 #include "Module.h"
 #include "Globals.h"
+#include "InputDefs.h"
 
 #define MAX_MOUSE_BUTTONS 5
 
@@ -30,7 +33,7 @@ public:
 
 	KEY_STATE GetMouseButton(int id) const
 	{
-		return mouse_buttons[id];
+		return KEY_IDLE; //mouse_buttons[id].state;
 	}
 
 	int GetMouseX() const
@@ -59,8 +62,13 @@ public:
 	}
 
 private:
+	bool ReadMouseInput();
+
+
+private:
 	KEY_STATE* keyboard;
-	KEY_STATE mouse_buttons[MAX_MOUSE_BUTTONS];
+	//MouseButton mouse_buttons[MAX_MOUSE_BUTTONS];
+	RAWINPUTDEVICE mouse;
 	int mouse_x;
 	int mouse_y;
 	int mouse_z;
@@ -68,3 +76,5 @@ private:
 	int mouse_y_motion;
 	//int mouse_z_motion;
 };
+
+#endif _MODULEINPUT_H_

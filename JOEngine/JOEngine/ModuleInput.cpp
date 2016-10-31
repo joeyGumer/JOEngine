@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
+
 #include <windowsx.h>
 #include <dinput.h>
 
@@ -10,6 +11,12 @@ ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app, sta
 {
 	keyboard = new KEY_STATE[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(KEY_STATE) * MAX_KEYS);
+
+	//Filed by hand due to incapacity to fill an array with mouse flags
+	/*mouse_buttons[MOUSE_LEFT_BUTTON] = { KEY_IDLE , RI_MOUSE_LEFT_BUTTON_DOWN };
+	mouse_buttons[MOUSE_RIGHT_BUTTON] = { KEY_IDLE , RI_MOUSE_RIGHT_BUTTON_DOWN };
+	mouse_buttons[MOUSE_MIDDLE_BUTTON] = { KEY_IDLE , RI_MOUSE_MIDDLE_BUTTON_DOWN };*/
+
 }
 
 // Destructor
@@ -22,15 +29,23 @@ ModuleInput::~ModuleInput()
 bool ModuleInput::Init()
 {
 	//NOTE: this will need to be out
-	LOG("Init SDL input event system");
+	LOG("Init Direct input event system");
 	bool ret = true;
-	SDL_Init(0);
+	/*SDL_Init(0);
 
 	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
-	}
+	}*/
+	
+
+	mouse.usUsage = 0x02;    // register mouse
+	mouse.usUsagePage = 0x01;    // top-level mouse
+	mouse.dwFlags = NULL;    // flags
+	mouse.hwndTarget = App->window->hWnd;    // handle to a window
+
+	RegisterRawInputDevices(&mouse, 1, sizeof(RAWINPUTDEVICE));
 
 	return ret;
 }
@@ -62,29 +77,29 @@ update_status ModuleInput::PreUpdate(float dt)
 		}
 	}
 
-	Uint32 buttons = SDL_GetMouseState(&mouse_x, &mouse_y);
+	//Uint32 buttons = SDL_GetMouseState(&mouse_x, &mouse_y);
 
 	mouse_x /= SCREEN_SIZE;
 	mouse_y /= SCREEN_SIZE;
 	mouse_z = 0;
 
-	for(int i = 0; i < 5; ++i)
+	/*for(int i = 0; i < 5; ++i)
 	{
-		if(buttons & SDL_BUTTON(i))
+		if(true)
 		{
-			if(mouse_buttons[i] == KEY_IDLE)
-				mouse_buttons[i] = KEY_DOWN;
+			if(mouse_buttons[i].state == KEY_IDLE)
+				mouse_buttons[i].state = KEY_DOWN;
 			else
-				mouse_buttons[i] = KEY_REPEAT;
+				mouse_buttons[i].state = KEY_REPEAT;
 		}
 		else
 		{
-			if(mouse_buttons[i] == KEY_REPEAT || mouse_buttons[i] == KEY_DOWN)
-				mouse_buttons[i] = KEY_UP;
+			if(mouse_buttons[i].state == KEY_REPEAT || mouse_buttons[i].state == KEY_DOWN)
+				mouse_buttons[i].state = KEY_UP;
 			else
-				mouse_buttons[i] = KEY_IDLE;
+				mouse_buttons[i].state = KEY_IDLE;
 		}
-	}
+	}*/
 
 	mouse_x_motion = mouse_y_motion = 0;
 
@@ -135,9 +150,14 @@ update_status ModuleInput::PreUpdate(float dt)
 		}
 		case WM_MOUSEMOVE:
 		{
+			int tmp_x = mouse_x;
+			int tmp_y = mouse_y;
+
 			mouse_x = GET_X_LPARAM(msg.lParam);
 			mouse_y = GET_Y_LPARAM(msg.lParam);
-			
+
+			mouse_x_motion = mouse_x - tmp_x;
+			mouse_y_motion = mouse_y - tmp_y;
 			break;
 		}
 		case WM_QUIT:
@@ -160,5 +180,11 @@ bool ModuleInput::CleanUp()
 {
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
+	return true;
+}
+
+
+bool ModuleInput::ReadMouseInput()
+{
 	return true;
 }

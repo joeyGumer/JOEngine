@@ -216,8 +216,24 @@ LRESULT CALLBACK Application::WindowProc(HWND hWnd, UINT message, WPARAM wParam,
 		{
 			PostQuitMessage(0);
 			return 0;
-		}	
-		break;
+		}
+		case WM_INPUT:
+		{
+			/*RAWINPUT InputData;
+
+			UINT DataSize = sizeof(RAWINPUT);
+			GetRawInputData((HRAWINPUT)lParam,
+				RID_INPUT,
+				&InputData,
+				&DataSize,
+				sizeof(RAWINPUTHEADER));
+
+			// set the mouse button status
+			static BOOL MouseDown;
+			if (InputData.data.mouse.usButtonFlags == RI_MOUSE_LEFT_BUTTON_DOWN)
+				MouseDown = TRUE;
+		break;*/
+		}
 	}
 
 	return DefWindowProc(hWnd, message, wParam, lParam);

@@ -50,13 +50,10 @@ update_status ModuleSceneIntro::Update(float dt)
 
 	//pPlane(0, 1, 0, 0).Render();
 
-	
-	if (App->input->GetKey(VK_W) == KEY_UP)
+	if (App->input->GetKey(VK_LBUTTON))
 	{
 		int i = 0;
 	}
-	
-	
 	
 
 
