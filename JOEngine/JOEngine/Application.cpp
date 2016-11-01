@@ -33,7 +33,7 @@ Application::Application()
 	AddModule(renderer3D);
 	//WARNING : provisional module
 	AddModule(geoload);
-	//AddModule(camera);
+	AddModule(camera);
 	AddModule(input);
 	AddModule(audio);
 	

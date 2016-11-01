@@ -7,9 +7,9 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 {
 	CalculateViewMatrix();
 
-	X = float3(1.0f, 0.0f, 0.0f);
+	X = float3(-1.0f, 0.0f, 0.0f);
 	Y = float3(0.0f, 1.0f, 0.0f);
-	Z = float3(0.0f, 0.0f, 1.0f);
+	Z = float3(0.0f, 0.0f, -1.0f);
 
 	Position = float3(0.0f, 0.0f, 10.0f);
 	Reference = float3(0.0f, 0.0f, 0.0f);
@@ -70,7 +70,7 @@ update_status ModuleCamera3D::Update(float dt)
 	// Implement a debug camera with keys and mouse
 
 	// OnKeys WASD keys -----------------------------------
-	/*float Speed = 5.0f;
+	float Speed = 5.0f;
 
 	if(App->input->GetKey(VK_LSHIFT) == KEY_REPEAT) Speed *= 2.0f;
 	if(App->input->GetKey(VK_LMENU) == KEY_REPEAT) Speed *= 0.5f;
@@ -85,10 +85,10 @@ update_status ModuleCamera3D::Update(float dt)
 	Right *= Distance;
 	Forward *= Distance;
 
-	float3 Movement;
+	float3 Movement = {0,0,0};
 
-	if(App->input->GetKey(VK_W) == KEY_REPEAT) Movement += Forward;
-	if(App->input->GetKey(VK_S) == KEY_REPEAT) Movement -= Forward;
+	if(App->input->GetKey(VK_W) == KEY_REPEAT) Movement -= Forward;
+	if(App->input->GetKey(VK_S) == KEY_REPEAT) Movement += Forward;
 	if(App->input->GetKey(VK_A) == KEY_REPEAT) Movement -= Right;
 	if(App->input->GetKey(VK_D) == KEY_REPEAT) Movement += Right;
 	if(App->input->GetKey(VK_R) == KEY_REPEAT) Movement += Up;
@@ -105,7 +105,7 @@ update_status ModuleCamera3D::Update(float dt)
 		int dx = -App->input->GetMouseXMotion();
 		int dy = -App->input->GetMouseYMotion();
 
-		float Sensitivity = 0.25f;
+		float Sensitivity = 0.05f;
 
 		Position -= Reference;
 
@@ -115,15 +115,15 @@ update_status ModuleCamera3D::Update(float dt)
 			
 			Quat q = { float3(0.0f, 1.0f, 0.0f), DeltaX };
 
-			q.Transform(X);
-			q.Transform(Y);
-			q.Transform(Z);
+			X = q.Transform(X);
+			Y = q.Transform(Y);
+			Z = q.Transform(Z);
 	
 			//Code before MathGeoLib
 			/*X = rotate(X, DeltaX, float3(0.0f, 1.0f, 0.0f));
 			Y = rotate(Y, DeltaX, float3(0.0f, 1.0f, 0.0f));
 			Z = rotate(Z, DeltaX, float3(0.0f, 1.0f, 0.0f));*/
-		/*}
+		}
 
 		if(dy != 0)
 		{
@@ -131,8 +131,8 @@ update_status ModuleCamera3D::Update(float dt)
 
 			Quat q = { X, DeltaY };
 
-			q.Transform(Y);
-			q.Transform(Z);
+			Y = q.Transform(Y);
+			Z = q.Transform(Z);
 
 			if(Y.y < 0.0f)
 			{
@@ -141,12 +141,12 @@ update_status ModuleCamera3D::Update(float dt)
 			}
 		}
 
-		Position = Reference + Z * Position.Length();
+		Position = Reference - Z * Position.Length();
 	}
 
 	// Mouse wheel -----------------------
 
-	float zDelta = (float) App->input->GetMouseZ();
+	/*float zDelta = (float) App->input->GetMouseZ();
 
 	Position -= Reference;
 
