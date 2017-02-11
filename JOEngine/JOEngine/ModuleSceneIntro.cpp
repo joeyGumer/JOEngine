@@ -48,12 +48,12 @@ update_status ModuleSceneIntro::Update(float dt)
 {
 	update_status ret = UPDATE_CONTINUE;
 
-	//pPlane(0, 1, 0, 0).Render();
 
-	if (App->input->GetKey(VK_LBUTTON))
+
+	/*if (App->input->GetKey(VK_LBUTTON))
 	{
 		int i = 0;
-	}
+	}*/
 	
 
 

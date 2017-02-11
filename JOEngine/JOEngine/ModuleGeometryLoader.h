@@ -19,10 +19,11 @@ struct Mesh
 
 	uint id_indices = 0;
 	uint num_indices = 0;
-	uint* indices = nullptr;
+	short* indices = nullptr;
 	LPDIRECT3DINDEXBUFFER9 i_buffer = NULL;
 
 	uint num_triangles = 0;
+	uint num_normals = 0;
 };
 
 class ModuleGeometryLoader : public Module

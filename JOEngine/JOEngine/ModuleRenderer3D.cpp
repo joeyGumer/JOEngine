@@ -196,7 +196,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	D3DXMATRIX matRotateX;
 	
 	D3DXMATRIX matTranslatE;
-	D3DXMatrixTranslation(&matTranslatE, 0, 20.0f, -100.0f);
+	D3DXMatrixTranslation(&matTranslatE, 1.0f, 0.0f, 0.0f);
 
 	//d3ddev->SetTransform(D3DTS_WORLD, &(matTranslatE));
 	/*static float index = 0.0f; index += 0.05f;
@@ -226,17 +226,16 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		D3DXToRadian(45),							// the horizontal field of view
 		(FLOAT)SCREEN_WIDTH / (FLOAT)SCREEN_HEIGHT, // aspect ratio
 		1.0f,										// the near view-plane
-		100.0f);									// the far view-plane
+		1000.0f);									// the far view-plane
 
 	d3ddev->SetTransform(D3DTS_PROJECTION, &matProjection);    // set the projection
 
+
 	// select the vertex buffer to display
-	d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
+	/*d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
 	d3ddev->SetIndices(i_buffer);
 
-
-	//d3ddev->SetTransform(D3DTS_WORLD, &(matTranslateA * matRotateY));
-	d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 24, 0, 12);
+	d3ddev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 24, 0, 12);*/
 
 	for (int i = 0; i < num_meshes; i++)
 	{
@@ -262,8 +261,7 @@ bool ModuleRenderer3D::CleanUp()
 	LOG("Destroying 3D Renderer");
 
 	
-	i_buffer->Release();
-	v_buffer->Release();
+
 	d3ddev->Release();
 	d3d->Release();
 	//SDL_GL_DeleteContext(context);
@@ -287,8 +285,9 @@ bool ModuleRenderer3D::CleanUp()
 
 void ModuleRenderer3D::init_graphics()
 {
+	//Cube
 	// create the vertices using the CUSTOMVERTEX struct
-	CUSTOMVERTEX vertices[] =
+	/*CUSTOMVERTEX vertices[] =
 	{
 		//Cube
 		// Side 1
@@ -337,7 +336,7 @@ void ModuleRenderer3D::init_graphics()
 											   {2.0f, -2.0f, -2.0f, D3DCOLOR_XRGB(255,0,0),}, //2
 											   {-2.0f, -2.0f, 2.0f, D3DCOLOR_XRGB(0,255,255),}, //3
 											   {2.0f, -2.0f, 2.0f, D3DCOLOR_XRGB(255,255,0),}, //4*/
-	};
+	/*};
 
 	// create a vertex buffer interface called v_buffer
 	d3ddev->CreateVertexBuffer(24 * sizeof(CUSTOMVERTEX),
@@ -379,7 +378,7 @@ void ModuleRenderer3D::init_graphics()
 	};
 
 	d3ddev->CreateIndexBuffer(
-		36 * sizeof(short),
+		37 * sizeof(short),
 		0,
 		D3DFMT_INDEX16,
 		D3DPOOL_MANAGED,
@@ -389,7 +388,7 @@ void ModuleRenderer3D::init_graphics()
 	// lock i_buffer and load the indices into it
 	i_buffer->Lock(0, 0, (void**)&pVoid, 0);
 	memcpy(pVoid, indices, sizeof(indices));
-	i_buffer->Unlock();
+	i_buffer->Unlock();*/
 }
 
 

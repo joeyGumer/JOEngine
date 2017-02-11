@@ -46,7 +46,7 @@ public:
 	LPDIRECT3D9 d3d = NULL; // the pointer to out Direct3D interface
 	D3DPRESENT_PARAMETERS d3dpp; // stores directx parameters
 	LPDIRECT3DDEVICE9 d3ddev = NULL; // the pointer to the device class
-	LPDIRECT3DVERTEXBUFFER9 v_buffer = NULL;  // the pointer to the vertex buffer
+	/*LPDIRECT3DVERTEXBUFFER9 v_buffer = NULL;  // the pointer to the vertex buffer
 	LPDIRECT3DINDEXBUFFER9 i_buffer = NULL;  // the pointer to the index buffer*/
 
 

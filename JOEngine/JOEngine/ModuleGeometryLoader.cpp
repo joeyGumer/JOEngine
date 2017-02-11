@@ -80,7 +80,10 @@ uint ModuleGeometryLoader::LoadFBX(const char* full_path)const
 					LOG("WARNING, vertex and mesh with no normals");
 				}
 				else
+				{
 					vertex.NORMAL = { new_mesh->mNormals[i].x, new_mesh->mNormals[i].y, new_mesh->mNormals[i].z };
+					m.num_normals++;
+				}
 
 				m.vertices[i] = vertex;
 
@@ -106,7 +109,7 @@ uint ModuleGeometryLoader::LoadFBX(const char* full_path)const
 			{
 				m.num_triangles = new_mesh->mNumFaces;
 				m.num_indices = new_mesh->mNumFaces * 3;
-				m.indices = new uint[m.num_indices]; // assume each face is a triangle
+				m.indices = new short[m.num_indices]; // assume each face is a triangle
 				for (uint i = 0; i < new_mesh->mNumFaces; ++i)
 				{
 					if (new_mesh->mFaces[i].mNumIndices != 3)
@@ -114,13 +117,13 @@ uint ModuleGeometryLoader::LoadFBX(const char* full_path)const
 						LOG("WARNING, geometry face with != 3 indices!");
 					}
 					else
-						memcpy(&m.indices[i * 3], new_mesh->mFaces[i].mIndices, 3 * sizeof(uint));
+						memcpy(&m.indices[i * 3], new_mesh->mFaces[i].mIndices, 3 * sizeof(short));
 
 				}
 
 				//Creating the index buffer
 				App->renderer3D->d3ddev->CreateIndexBuffer(
-					m.num_indices * 3 * sizeof(uint),
+					m.num_indices * sizeof(short),
 					0,
 					D3DFMT_INDEX16,
 					D3DPOOL_MANAGED,

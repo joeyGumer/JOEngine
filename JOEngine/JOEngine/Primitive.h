@@ -23,6 +23,7 @@ class Primitive
 public:
 
 	Primitive();
+	virtual ~Primitive();
 
 	virtual void	Render() const;
 	virtual void	InnerRender() const;
@@ -42,6 +43,7 @@ public:
 protected:
 	PrimitiveTypes type;
 	std::vector<CUSTOMVERTEX> vertices;
+	CUSTOMVERTEX* vert;
 };
 
 // ============================================

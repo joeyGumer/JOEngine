@@ -6,6 +6,7 @@
 #include "glut/glut.h"
 
 
+
 //NOTE: not sure about doing this
 #include "Application.h"
 #include "ModuleRenderer3D.h"
@@ -19,6 +20,10 @@ using namespace std;
 Primitive::Primitive() : transform(float4x4::identity), color(White), wire(false), axis(false), type(PrimitiveTypes::Primitive_Point)
 {}
 
+Primitive::~Primitive()
+{
+	RELEASE_ARRAY(vert);
+}
 // ------------------------------------------------------------
 PrimitiveTypes Primitive::GetType() const
 {
@@ -275,16 +280,26 @@ void pPlane::Init()
 {
 	float d = 200.0f;
 
-	for (float i = -d; i <= d; i += 1.0f)
-	{
+	vert = new CUSTOMVERTEX[8];
+
+	vert[0] = { 1.0f, 2.0f, 0.0f, normal.x, normal.y, normal.z };
+	vert[1] = { 1.0f, -2.0f, 0.0f, normal.x, normal.y, normal.z };
+	vert[2] = { -1.0f, 2.0f, 0.0f, normal.x, normal.y, normal.z };
+	vert[3] = { -1.0f, -2.0f, 0.0f, normal.x, normal.y, normal.z };
+	vert[4] = { 2.0f, -1.0f, 0.0f, normal.x, normal.y, normal.z };
+	vert[5] = { -2.0f, -1.0f, 0.0f, normal.x, normal.y, normal.z };
+	vert[6] = { 2.0f, 1.0f, 0.0f, normal.x, normal.y, normal.z };
+	vert[7] = { -2.0f, 1.0f, 0.0f, normal.x, normal.y, normal.z };
+
+
 		
-		vertices.push_back({ i, 0.0f, -d , normal.x, normal.y, normal.z });
+		/*vertices.push_back({ i, 0.0f, -d , normal.x, normal.y, normal.z });
 		vertices.push_back({ i, 0.0f, d , normal.x, normal.y, normal.z });
 		vertices.push_back({ -d, 0.0f, i , normal.x, normal.y, normal.z });
-		vertices.push_back({ d, 0.0f, i , normal.x, normal.y, normal.z });
-	}
+		vertices.push_back({ d, 0.0f, i , normal.x, normal.y, normal.z });*/
+	
 
-	App->renderer3D->d3ddev->CreateVertexBuffer(24 * sizeof(CUSTOMVERTEX),
+	App->renderer3D->d3ddev->CreateVertexBuffer(200 * sizeof(CUSTOMVERTEX),
 		0,
 		CUSTOMFVF,
 		D3DPOOL_MANAGED,
@@ -293,9 +308,9 @@ void pPlane::Init()
 
 	VOID* pVoid;    // a void pointer
 
-					// lock v_buffer and load the vertices into it
+	// lock v_buffer and load the vertices into it
 	v_buffer->Lock(0, 0, (void**)&pVoid, 0);
-	memcpy(pVoid, &vertices, sizeof(vertices));
+	memcpy(pVoid, &vert, sizeof(vert));
 	v_buffer->Unlock();
 }
 void pPlane::InnerRender() const
@@ -306,8 +321,7 @@ void pPlane::InnerRender() const
 	App->renderer3D->d3ddev->BeginScene();
 
 	App->renderer3D->d3ddev->SetStreamSource(0, v_buffer, 0, sizeof(CUSTOMVERTEX));
-	//App->renderer3D->d3ddev->DrawIndexedPrimitive(D3DPT_LINELIST, 0, 0, 24, 0, 12);
-	App->renderer3D->d3ddev->DrawPrimitive(D3DPT_POINTLIST, 0, 200);
+	App->renderer3D->d3ddev->DrawPrimitive(D3DPT_LINELIST, 0, 8);
 
 	App->renderer3D->d3ddev->EndScene();
 	/*glLineWidth(1.0f);

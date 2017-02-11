@@ -11,7 +11,7 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 	Y = float3(0.0f, 1.0f, 0.0f);
 	Z = float3(0.0f, 0.0f, -1.0f);
 
-	Position = float3(0.0f, 0.0f, 10.0f);
+	Position = float3(0.0f, 5.0f, 10.0f);
 	Reference = float3(0.0f, 0.0f, 0.0f);
 
 	following = NULL;
@@ -146,7 +146,7 @@ update_status ModuleCamera3D::Update(float dt)
 
 	// Mouse wheel -----------------------
 
-	/*float zDelta = (float) App->input->GetMouseZ();
+	float zDelta = (float) App->input->GetMouseZ();
 
 	Position -= Reference;
 
@@ -160,7 +160,7 @@ update_status ModuleCamera3D::Update(float dt)
 		Position -= Position * 0.1f;
 	}
 
-	Position += Reference;*/
+	Position += Reference;
 
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
